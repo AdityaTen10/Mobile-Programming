@@ -1,0 +1,16 @@
+/* dot.css */
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px;
+}
+
+.dot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
