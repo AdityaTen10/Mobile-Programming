@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QueueSewa - Digital Queue Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f8fafc;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+        }
+
+        .nav-btn {
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 8%;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            color: #64748b;
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 550px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .secondary-btn {
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: white;
+        }
+
+        /* Phone Mockup */
+        .phone {
+            width: 280px;
+            height: 540px;
+            background: #111827;
+            border-radius: 35px;
+            padding: 10px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+        }
+
+        .phone-screen {
+            height: 100%;
+            border-radius: 27px;
+            background: white;
+            padding: 25px 18px;
+        }
+
+        .phone-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .phone-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .queue-card {
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .queue-number {
+            font-size: 45px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .status {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .service {
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Sections */
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: auto;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px 22px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: #dbeafe;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* How it works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+            margin: auto;
+            margin-bottom: 18px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .step p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: #0f172a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .benefit-text {
+            max-width: 550px;
+        }
+
+        .benefit-text h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-text p {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+        .benefit-list {
+            list-style: none;
+        }
+
+        .benefit-list li {
+            margin: 15px 0;
+            color: #e2e8f0;
+        }
+
+        .benefit-list li::before {
+            content: "✓";
+            color: #60a5fa;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            min-width: 400px;
+        }
+
+        .stat {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 35px;
+            color: #60a5fa;
+        }
+
+        .stat p {
+            color: #cbd5e1;
+        }
+
+        /* Admin */
+        .admin {
+            display: flex;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .admin-box {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .dashboard-card {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .dashboard-card strong {
+            display: block;
+            font-size: 25px;
+            color: #2563eb;
+        }
+
+        .admin-text {
+            flex: 1;
+        }
+
+        .admin-text h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .admin-text p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            background: #2563eb;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 30px;
+            color: #dbeafe;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #2563eb;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            color: white;
+            padding: 50px 8%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .features,
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits,
+            .admin {
+                flex-direction: column;
+            }
+
+            .stats {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .features,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 50px 5%;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">QueueSewa</div>
+
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#admin">Admin</a></li>
+        </ul>
+
+        <a href="#download" class="nav-btn">Get Started</a>
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <span class="tag">DIGITAL QUEUE MANAGEMENT</span>
+
+            <h1>
+                Skip the long queue.
+                <span>Save your time.</span>
+            </h1>
+
+            <p>
+                QueueSewa helps citizens book government service tokens
+                digitally, check service requirements, track their queue,
+                and know when it is their turn.
+            </p>
+
+            <div class="buttons">
+                <a href="#download" class="primary-btn">
+                    Get the App
+                </a>
+
+                <a href="#how" class="secondary-btn">
+                    How It Works
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- Mobile App Mockup -->
+        <div class="phone">
+
+            <div class="phone-screen">
+
+                <div class="phone-header">
+                    <span class="phone-title">QueueSewa</span>
+                    <span>🔔</span>
+                </div>
+
+                <div class="queue-card">
+
+                    <p>Your Token</p>
+
+                    <div class="queue-number">
+                        A-24
+                    </div>
+
+                    <span class="status">
+                        Your turn is approaching
+                    </span>
+
+                </div>
+
+                <div class="service">
+                    🏛️ Citizenship Service
+                </div>
+
+                <div class="service">
+                    📍 Kathmandu Office
+                </div>
+
+                <div class="service">
+                    ⏱️ Estimated wait: 18 min
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section id="features">
+
+        <div class="section-title">
+
+            <h2>Everything you need to avoid the queue</h2>
+
+            <p>
+                A simple digital platform connecting citizens
+                with government services.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="icon">🎫</div>
+
+                <h3>Digital Token</h3>
+
+                <p>
+                    Book your queue number from your phone
+                    before visiting the government office.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">📋</div>
+
+                <h3>Service Information</h3>
+
+                <p>
+                    Check required documents, procedures,
+                    fees and other service information.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">🔔</div>
+
+                <h3>Queue Notifications</h3>
+
+                <p>
+                    Receive notifications when your turn
+                    is getting closer.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">⏱️</div>
+
+                <h3>Waiting Time</h3>
+
+                <p>
+                    View estimated waiting times and
+                    plan your visit accordingly.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">📱</div>
+
+                <h3>Queue Tracking</h3>
+
+                <p>
+                    Track your current queue position
+                    directly from your smartphone.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">🏢</div>
+
+                <h3>Office Selection</h3>
+
+                <p>
+                    Find available government offices
+                    and select the most convenient one.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">📊</div>
+
+                <h3>Digital Records</h3>
+
+                <p>
+                    Maintain digital records of queue
+                    activities and completed services.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="icon">⚙️</div>
+
+                <h3>Admin Management</h3>
+
+                <p>
+                    Government staff can manage tokens,
+                    queues and appointments efficiently.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- How It Works -->
+    <section id="how" style="background:#ffffff;">
+
+        <div class="section-title">
+
+            <h2>How QueueSewa Works</h2>
+
+            <p>
+                Get your government service without
+                spending hours waiting in line.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Choose a Service</h3>
+
+                <p>
+                    Select the government service
+                    you need from the application.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>Book a Token</h3>
+
+                <p>
+                    Select an office and reserve
+                    your digital queue token.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>Track Your Queue</h3>
+
+                <p>
+                    Monitor your queue position
+                    and estimated waiting time.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Visit When Ready</h3>
+
+                <p>
+                    Receive a notification and visit
+                    the office when your turn approaches.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Benefits -->
+    <section class="benefits" id="benefits">
+
+        <div class="benefit-text">
+
+            <h2>Less Waiting. Better Government Services.</h2>
+
+            <p>
+                QueueSewa is designed to reduce physical
+                waiting time and overcrowding while making
+                government services more accessible to citizens.
+            </p>
+
+            <ul class="benefit-list">
+
+                <li>Reduce unnecessary physical waiting</li>
+
+                <li>Reduce overcrowding at government offices</li>
+
+                <li>Help citizens plan their visits</li>
+
+                <li>Improve government service efficiency</li>
+
+                <li>Provide transparent queue information</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <h3>24/7</h3>
+                <p>Token Booking</p>
+            </div>
+
+            <div class="stat">
+                <h3>Real-Time</h3>
+                <p>Queue Tracking</p>
+            </div>
+
+            <div class="stat">
+                <h3>Less</h3>
+                <p>Physical Waiting</p>
+            </div>
+
+            <div class="stat">
+                <h3>Digital</h3>
+                <p>Service Records</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Admin -->
+    <section id="admin">
+
+        <div class="section-title">
+
+            <h2>Powerful Tools for Government Staff</h2>
+
+            <p>
+                A dedicated administration system helps
+                offices manage daily queues efficiently.
+            </p>
+
+        </div>
+
+
+        <div class="admin">
+
+            <div class="admin-box">
+
+                <div class="dashboard">
+
+                    <div class="dashboard-card">
+                        <strong>124</strong>
+                        Active Tokens
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>42</strong>
+                        Waiting
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>82</strong>
+                        Completed
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>18m</strong>
+                        Avg. Wait
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-text">
+
+                <h2>
+                    Manage queues from one dashboard.
+                </h2>
+
+                <p>
+                    Government staff can manage tokens,
+                    appointments, service requests and
+                    completed services from a centralized
+                    administration system.
+                </p>
+
+                <a href="#download" class="primary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+
+        <h2>Ready to make government services easier?</h2>
+
+        <p>
+            Book your token digitally and spend less time waiting.
+        </p>
+
+        <a href="#" class="cta-btn">
+            Download QueueSewa
+        </a>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div>
+            <h2>QueueSewa</h2>
+
+            <p>
+                Digital Queue Management System
+            </p>
+        </div>
+
+        <div>
+            <p>
+                Making government services
+                simpler, faster and more accessible.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
