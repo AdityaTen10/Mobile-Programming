@@ -3,7 +3,7 @@ To develop a mobile-based digital queue management system that helps citizens bo
 
 Specific Objectives:
 
-To develop a digital token booking system that allows citizens to reserve a queue number before visiting the government office.
+To develop a digital token booking system that allows citizens to reserve a queue number before vdisiting the government office.
 To provide information about government services and clearly display the required documents and procedures for each service.
 To reduce physical waiting time and overcrowding at government offices through digital queue management.
 To allow citizens to track their queue status and receive notifications when their turn is approaching.
