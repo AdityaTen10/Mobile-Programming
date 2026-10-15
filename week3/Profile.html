@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Profile</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        /* Profile Card */
+        .profile {
+            width: 350px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Profile Image */
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ddd;
+        }
+
+        .profile h2 {
+            margin-bottom: 5px;
+        }
+
+        .profile p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* QR Code */
+        #qr {
+            width: 200px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            background-color: #333;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function(){
+
+            // Show QR
+            $("#show").click(function(){
+                $("#qr").fadeIn(1000);
+                $("#hide").fadeIn(1000);
+                $("#show").fadeOut(500);
+            });
+
+            // Hide QR
+            $("#hide").click(function(){
+                $("#qr").fadeOut(1000);
+                $("#hide").fadeOut(500);
+                $("#show").fadeIn(500);
+            });
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Profile Design -->
+    <div class="profile">
+
+        <!-- Profile Picture -->
+        <img src="photo.jpg" alt="Profile Picture">
+
+        <!-- Profile Details -->
+        <h2>Aditya Chaudhary</h2>
+
+        <p>
+            <b>Age:</b> 20
+            <br>
+
+            <b>Address:</b> Kathmandu, Nepal
+            <br>
+
+            <b>Education:</b> BSc IT
+            <br>
+
+            <b>Email:</b> aditya@example.com
+            <br>
+
+            <b>Phone:</b> 98XXXXXXXX
+        </p>
+
+        <!-- QR Code -->
+        <img id="qr" src="qr-code.png" alt="QR Code" style="display: none;">
+
+        <br>
+
+        <!-- QR Buttons -->
+        <button id="show">Show QR</button>
+
+        <button id="hide" style="display: none;">
+            Hide QR
+        </b

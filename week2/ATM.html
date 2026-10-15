@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM</title>
+</head>
+<body>
+
+    <h2>ATM Machine</h2>
+
+    <label>Enter PIN:</label>
+    <input type="number" id="pin">
+
+    <button onclick="login()">Enter PIN</button>
+
+    <p id="message"></p>
+
+    <div id="atm" style="display: none;">
+
+        <label>Amount:</label>
+        <input type="number" id="amount">
+
+        <br><br>
+
+        <button onclick="checkBalance()">Check Balance</button>
+        <button onclick="withdraw()">Withdraw</button>
+        <button onclick="deposit()">Deposit</button>
+
+    </div>
+
+    <h3 id="result"></h3>
+
+    <script src="atm.js"></script>
+
+</body>
+</html>
